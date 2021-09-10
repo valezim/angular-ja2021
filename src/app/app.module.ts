@@ -18,8 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
-      { path: 'registro/', component: RegistroComponent },
-      { path: 'dashboard/', component: DashboardComponent },
+      { path: 'registro', component: RegistroComponent },
+      { path: 'dashboard', component: DashboardComponent },
     //  { path: '', component: ProductListComponent },
     //  { path: 'product/:productId', component: ProductDetailComponent },
     ])
