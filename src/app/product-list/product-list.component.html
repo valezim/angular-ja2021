@@ -1,0 +1,45 @@
+<h2>Products</h2>
+
+<div *ngFor="let product of products">
+  <h3>
+    <!--  Navegacion  es el routerlink-->
+    <a [title]="product.name + ' details'" [routerLink]="['/product',product.id]">
+
+      {{ product.name }}
+    </a>
+  </h3>
+
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+
+  <p *ngIf="product.price > 700">
+    Description de productos mayor a precio 700: {{ product.description }}
+  </p>
+
+  <button (click)="share()">
+    Share
+  </button>
+
+  <!--Agarramos un componente nuevo "product-alerts" y lo incrustamos aca  -->
+  <!-- el [product]="product" es el pasaje de padre a hijo
+  el "product" es el nombre que puse en el recorrido ngfor
+  y el [product] es el nombre que va a recibir mi hijo en @Input
+    y el (notify) es de hijo a padre  
+  -->
+  <app-product-alerts [product]="product" (notify)="onNotify()">
+  </app-product-alerts>
+
+
+  <!--
+  <button *ngIf="product.price > 700" (click)="share()">
+    Share
+  </button>
+  -->
+
+</div>
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

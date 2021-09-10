@@ -1,0 +1,28 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+    <div class="fadeIn first">
+      <img src="" id="icon" />
+    </div>
+
+    <form>
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario">
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña">
+      <input [routerLink]="['dashboard/']" type="submit" class="fadeIn fourth" value="Login">
+    </form>
+
+    <div id="formFooter">
+
+    <a [routerLink]="['registro/']">
+      ¿Aún no se ha registrado?
+    </a>
+    
+
+
+
+  </div>
+</div>
