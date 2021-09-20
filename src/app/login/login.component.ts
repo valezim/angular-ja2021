@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,11 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 loginGroup;
+errMsg: any;
   constructor(   
      private formBuilder: FormBuilder,
-     private userService: UserService
+     private userService: UserService,
+     private router: Router
      ) { 
 
     this.loginGroup = this.formBuilder.group({
@@ -25,11 +28,17 @@ loginGroup;
   ngOnInit() {
   }
 
-  formSubmit(){
-    const {usuario, password} = this.loginGroup.value;
+  formSubmit() {
+    this.errMsg = '';
+    const { usuario, password } = this.loginGroup.value;
     this.userService.login(usuario, password).subscribe(
       user => {
+        this.userService.setUser(user);
         console.log(user);
+        this.router.navigate(['/list']);
+      },
+      ({ error: { mensaje } }) => {
+        this.errMsg = mensaje;
       }
     );
   }
