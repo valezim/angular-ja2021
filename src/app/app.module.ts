@@ -11,11 +11,14 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
