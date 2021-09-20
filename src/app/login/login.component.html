@@ -9,7 +9,7 @@
       <img src="" id="icon" />
     </div>
 
-    <form>
+    <form (ngSubmit = "formSubmit()")>
       <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario">
       <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña">
       <button [routerLink]="['dashboard']" class="fadeIn fourth" > Login </button>

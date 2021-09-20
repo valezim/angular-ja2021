@@ -20,8 +20,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       { path: '', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
       { path: 'dashboard', component: DashboardComponent },
-    //  { path: '', component: ProductListComponent },
+   //   { path: '', component: ProductListComponent },
     //  { path: 'product/:productId', component: ProductDetailComponent },
+
     ])
   ],
   declarations: [
