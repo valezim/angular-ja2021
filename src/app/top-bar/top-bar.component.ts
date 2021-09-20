@@ -7,14 +7,21 @@ import { UserService } from '../user.service';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
+  isLogoutVisible = false;
   constructor(     private userService: UserService) { }
 
   ngOnInit() {
   }
 
   logOut(){
+    this.isLogoutVisible = false;
     this.userService.logOut();
   }
+
+  showNavBar(){
+      this.isLogoutVisible = true;
+  }
+
 
 }
 

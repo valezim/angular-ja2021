@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ errMsg: any;
   constructor(   
      private formBuilder: FormBuilder,
      private userService: UserService,
+     private topBar: TopBarComponent,
      private router: Router
      ) { 
 
@@ -34,6 +36,7 @@ errMsg: any;
     this.userService.login(usuario, password).subscribe(
       user => {
         this.userService.setUser(user, usuario);
+        this.topBar.showNavBar();
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {

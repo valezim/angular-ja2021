@@ -16,6 +16,10 @@ export class UserService {
     this.userName = userName;
   }
 
+  getUser() {
+    return this.user;
+  }
+
   getUserId() {
     return this.user?.id;
   }
