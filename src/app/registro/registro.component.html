@@ -10,11 +10,12 @@
       <img src="" id="icon" />
     </div>
 
-    <form>
-      <input type="text" id="register" class="fadeIn second" name="login" placeholder="usuario">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="repita la contraseña">
+    <form [formGroup]="registerGroup" (ngSubmit)="formSubmit()">
+      <input type="text" id="register" class="fadeIn second" name="login" placeholder="usuario" formControlName="usuario">
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña" formControlName="password">
       <button class="fadeIn fourth"> Registrarme </button>
+
+      <p *ngIf="errMsg">{{errMsg}}</p>
     </form>
 
     <div id="formFooter">
