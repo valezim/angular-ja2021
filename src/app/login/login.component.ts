@@ -15,7 +15,7 @@ errMsg: any;
   constructor(   
      private formBuilder: FormBuilder,
      private userService: UserService,
-     private topBar: TopBarComponent,
+  //   private topBar: TopBarComponent,
      private router: Router
      ) { 
 
@@ -36,7 +36,7 @@ errMsg: any;
     this.userService.login(usuario, password).subscribe(
       user => {
         this.userService.setUser(user, usuario);
-        this.topBar.showNavBar();
+      //  this.topBar.setLogoutVisible(true);
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {

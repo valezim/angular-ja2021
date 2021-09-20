@@ -18,8 +18,8 @@ export class TopBarComponent implements OnInit {
     this.userService.logOut();
   }
 
-  showNavBar(){
-      this.isLogoutVisible = true;
+  setLogoutVisible (value:boolean){
+    this.isLogoutVisible = value;
   }
 
 
