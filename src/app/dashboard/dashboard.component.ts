@@ -7,7 +7,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  userName = this.userService.getUserId();
+  userName = this.userService.getUserName();
   constructor(     private userService: UserService) { }
 
   ngOnInit() {

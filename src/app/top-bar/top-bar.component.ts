@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.css']
 })
-export class TopBarComponent {
+export class TopBarComponent implements OnInit {
+  constructor(     private userService: UserService) { }
+
+  ngOnInit() {
+  }
+
+  logOut(){
+    this.userService.logOut();
+  }
 
 }
 

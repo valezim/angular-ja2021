@@ -34,7 +34,6 @@ errMsg: any;
     this.userService.login(usuario, password).subscribe(
       user => {
         this.userService.setUser(user, usuario);
-        console.log(user);
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
