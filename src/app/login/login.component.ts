@@ -22,7 +22,7 @@ loginGroup;
   }
 
   formSubmit(){
-    alert('submit!')
+    console.log(this.loginGroup.value);
   }
 
 }

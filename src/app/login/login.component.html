@@ -10,8 +10,8 @@
     </div>
 
     <form [formGroup]="loginGroup" (ngSubmit)="formSubmit()">
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña">
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario" formControlGroup="usuario">
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña" formControlGroup="password">
       <button type="submit" class="fadeIn fourth" > Login </button>
     </form>
 
