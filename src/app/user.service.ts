@@ -34,4 +34,13 @@ export class UserService {
       headers
     });
   }
+
+
+  register(usuario: string, password: string) {
+    const headers = { 'Content-type': 'application/json' };
+    const body = JSON.stringify({ usuario, password });
+    return this.http.post('https://destinos.develotion.com/usuarios.php', body, {
+      headers
+    });
+  }
 }
