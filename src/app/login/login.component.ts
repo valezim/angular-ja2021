@@ -37,7 +37,8 @@ errMsg: any;
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
-        this.errMsg = mensaje;
+    //    this.errMsg = mensaje;
+    this.errMsg = '¡Oops! El usuario y/o la contraseña son incorrectos.';
       }
     );
   }

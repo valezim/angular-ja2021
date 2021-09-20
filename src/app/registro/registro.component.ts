@@ -37,7 +37,8 @@ export class RegistroComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         },
         ({ error: { mensaje } }) => {
-          this.errMsg = mensaje;
+         // this.errMsg = mensaje;
+         this.errMsg = 'El usuario que trata de registrar ya existe.';
         }
       );
     }

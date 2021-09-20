@@ -210,7 +210,9 @@ input[type=password]:placeholder {
   color: #cccccc;
 }
 
-
+p {
+  color: #fff;
+}
 
 
 /* ANIMATIONS */
