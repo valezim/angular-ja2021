@@ -9,10 +9,10 @@
       <img src="" id="icon" />
     </div>
 
-    <form (ngSubmit = "formSubmit()")>
+    <form [formGroup]="loginGroup" (ngSubmit)="formSubmit()">
       <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario">
       <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña">
-      <button [routerLink]="['dashboard']" class="fadeIn fourth" > Login </button>
+      <button type="submit" class="fadeIn fourth" > Login </button>
     </form>
 
     <div id="formFooter">
