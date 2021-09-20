@@ -35,7 +35,7 @@ errMsg: any;
       user => {
         this.userService.setUser(user);
         console.log(user);
-        this.router.navigate(['/registro']);
+        this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
         this.errMsg = mensaje;
