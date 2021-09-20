@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root',
 })
-
 export class UserService {
   user: any;
+  userName = '';
 
   constructor(private http: HttpClient) {}
 
-  setUser(user: any) {
+  setUser(user: any, userName: string) {
     this.user = user;
+    this.userName = userName;
   }
 
   getUserId() {
@@ -23,24 +24,32 @@ export class UserService {
     return this.user?.apiKey;
   }
 
-  logOut(){
+  getUserName() {
+    return this.userName;
+  }
+
+  logOut() {
     this.user = undefined;
+    this.userName = '';
   }
 
   login(usuario: string, password: string) {
     const headers = { 'Content-type': 'application/json' };
     const body = JSON.stringify({ usuario, password });
     return this.http.post('https://destinos.develotion.com/login.php', body, {
-      headers
+      headers,
     });
   }
-
 
   register(usuario: string, password: string) {
     const headers = { 'Content-type': 'application/json' };
     const body = JSON.stringify({ usuario, password });
-    return this.http.post('https://destinos.develotion.com/usuarios.php', body, {
-      headers
-    });
+    return this.http.post(
+      'https://destinos.develotion.com/usuarios.php',
+      body,
+      {
+        headers,
+      }
+    );
   }
 }

@@ -33,7 +33,7 @@ errMsg: any;
     const { usuario, password } = this.loginGroup.value;
     this.userService.login(usuario, password).subscribe(
       user => {
-        this.userService.setUser(user);
+        this.userService.setUser(user, usuario);
         console.log(user);
         this.router.navigate(['/dashboard']);
       },
