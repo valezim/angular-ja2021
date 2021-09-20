@@ -13,6 +13,8 @@
       <input type="text" id="login" class="fadeIn second" name="login" placeholder="usuario" formControlName="usuario">
       <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña" formControlName="password">
       <button type="submit" class="fadeIn fourth" > Login </button>
+
+      <h4 *ngIf="errMsg">{{errMsg}}</h4>
     </form>
 
     <div id="formFooter">
