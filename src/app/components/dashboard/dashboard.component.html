@@ -79,12 +79,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td align="center">cliente1</td>
-                <td>paquete1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4980</td>
+              <tr *ngFor="let venta of ventas">
+                <td align="center">{{ venta.nombre_cliente }}</td>
+                <td>{{ venta.id_paquete }}</td>
+                <td>{{ venta.cantidad_mayores }}</td>
+                <td>{{ venta.cantidad_menores }}</td>
+                <td></td>
               </tr>
             </tbody>
           </table>

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { PaqueteResponse } from '../../interfaces/paquete-response';
 import { Paquete } from '../../interfaces/paquete';
+import { VentaResponse } from '../../interfaces/venta-response';
+import { Venta } from '../../interfaces/venta';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +16,7 @@ import { Paquete } from '../../interfaces/paquete';
 export class DashboardComponent implements OnInit {
   userName = this.userService.getUserName();
   paquetes = this.ventaService.getPaquetes();
+  ventas = this.ventaService.getVentas();
   venderPaqueteGroup;
   errMsg: any;
   constructor(
@@ -33,6 +36,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getAllPaquetes();
+    this.getVentasDeVendedor();
   }
 
   getAllPaquetes() {
@@ -68,12 +72,26 @@ export class DashboardComponent implements OnInit {
       )
       .subscribe(
         (venta) => {
-          //     this.ventaService.obtenerVentas(apikey);
+          this.getVentasDeVendedor();
           console.log('se concreto la ventaaa');
         },
         ({ error: { mensaje } }) => {
           this.errMsg = mensaje;
         }
       );
+  }
+
+  getVentasDeVendedor() {
+    const apikey = this.userService.getApiKey();
+    const id = this.userService.getUserId();
+    this.ventaService.obtenerVentasDeVendedor(apikey, id).subscribe(
+      (response: VentaResponse) => {
+        this.ventaService.updateVentas(response.ventas);
+        this.ventas = response.ventas;
+      },
+      (error: any) => {
+        //alert(error);
+      }
+    );
   }
 }
