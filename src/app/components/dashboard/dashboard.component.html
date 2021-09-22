@@ -36,10 +36,10 @@
                 />
 
                 <select formControlName="idPaquete">
-                  <option [ngValue]="-1">
-                    Seleccione un paquete
-                  </option>
-                  <option *ngFor="let paquete of paquetes" [ngValue]="paquete.id">
+                  <option
+                    *ngFor="let paquete of paquetes"
+                    [ngValue]="paquete.id"
+                  >
                     {{ paquete.nombre }}
                   </option>
                 </select>
@@ -81,10 +81,10 @@
             <tbody>
               <tr *ngFor="let venta of ventas">
                 <td align="center">{{ venta.nombre_cliente }}</td>
-                <td>{{ venta.id_paquete }}</td>
+                <td>{{ obtenerPaquetePorId(venta.id_paquete)?.nombre }}</td>
                 <td>{{ venta.cantidad_mayores }}</td>
                 <td>{{ venta.cantidad_menores }}</td>
-                <td></td>
+                <td>{{ calcularPrecioFinal(venta) }}</td>
               </tr>
             </tbody>
           </table>

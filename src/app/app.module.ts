@@ -12,7 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantidad-paquetes.component';
 
 @NgModule({
   imports: [
@@ -23,10 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
       { path: '', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
       { path: 'dashboard', component: DashboardComponent },
-   //   { path: '', component: ProductListComponent },
-    //  { path: 'product/:productId', component: ProductDetailComponent },
-
-    ])
+      //   { path: '', component: ProductListComponent },
+      //  { path: 'product/:productId', component: ProductDetailComponent },
+    ]),
   ],
   declarations: [
     AppComponent,
@@ -35,9 +34,10 @@ import { HttpClientModule } from '@angular/common/http';
     ProductAlertsComponent,
     LoginComponent,
     RegistroComponent,
-    DashboardComponent
+    DashboardComponent,
+    CantidadPaquetesComponent,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 

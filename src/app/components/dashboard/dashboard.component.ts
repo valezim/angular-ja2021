@@ -59,6 +59,7 @@ export class DashboardComponent implements OnInit {
     const idVendedor = this.userService.getUserId();
     const { nombreCliente, idPaquete, cantidadMayores, cantidadMenores } =
       this.venderPaqueteGroup.value;
+    console.log(idPaquete);
     if (
       this.validarDatosAgregarVenta(
         nombreCliente,
@@ -121,10 +122,26 @@ export class DashboardComponent implements OnInit {
         'La cantidad de niños y adultos sumada no puede superar las 10 personas.';
       return false;
     }
-    if (idPaquete === '-1') {
+    if (idPaquete === 0) {
       this.errMsg = 'Debe seleccionar un paquete.';
       return false;
     }
     return true;
+  }
+
+  calcularPrecioFinal(venta: Venta) {
+    const paquete = this?.obtenerPaquetePorId(venta?.id_paquete);
+    if (paquete != undefined) {
+      return (
+        venta?.cantidad_mayores * paquete?.precio_mayor +
+        venta?.cantidad_menores * paquete?.precio_menor
+      );
+    }
+    return 0;
+  }
+
+  obtenerPaquetePorId(id: any) {
+    const paquete = this.paquetes?.find((paq) => paq?.id === id);
+    return paquete;
   }
 }
