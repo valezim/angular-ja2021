@@ -56,4 +56,21 @@ export class VentaService {
       headers,
     });
   }
+
+  obtenerVentasDeVendedor(token: any) {
+    const headers = {
+      'Content-type': 'application/json',
+      apikey: token,
+    };
+    return this.http.get<PaqueteResponse>(
+      'https://destinos.develotion.com/paquetes.php',
+      {
+        headers,
+      }
+    );
+  }
+
+
+
+
 }

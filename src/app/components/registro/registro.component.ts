@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.css'],
 })
-export class LoginComponent implements OnInit {
-  loginGroup;
+export class RegistroComponent implements OnInit {
+  registerGroup;
   errMsg: any;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    //   private topBar: TopBarComponent,
+    //    private topBar: TopBarComponent,
     private router: Router
   ) {
-    this.loginGroup = this.formBuilder.group({
+    this.registerGroup = this.formBuilder.group({
       usuario: '',
       password: '',
     });
@@ -28,17 +28,16 @@ export class LoginComponent implements OnInit {
 
   formSubmit() {
     this.errMsg = '';
-    const { usuario, password } = this.loginGroup.value;
-    this.userService.login(usuario, password).subscribe(
+    const { usuario, password } = this.registerGroup.value;
+    this.userService.register(usuario, password).subscribe(
       (user) => {
-        console.log(user);
         this.userService.setUser(user, usuario);
-        //   this.topBar.setLogoutVisible(true);
+        //    this.topBar.setLogoutVisible(true);
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
         this.errMsg = mensaje;
-        //  this.errMsg = '¡Oops! El usuario y/o la contraseña son incorrectos.';
+        //    this.errMsg = 'El usuario que trata de registrar ya existe.';
       }
     );
   }

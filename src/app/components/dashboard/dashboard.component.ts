@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
-import { VentaService } from '../venta.service';
+import { UserService } from '../../services/user.service';
+import { VentaService } from '../../services/venta.service';
 import { Router } from '@angular/router';
 import { Paquete } from '../paquete';
 import { FormBuilder } from '@angular/forms';
+import { PaqueteResponse } from '../../interfaces/paquete-response';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,6 +50,7 @@ export class DashboardComponent implements OnInit {
   }
 
   formSubmit() {
+    console.log('llegamos a la venta');
     this.errMsg = '';
     const apikey = this.userService.getApiKey();
     const idVendedor = this.userService.getUserId();
@@ -67,15 +69,11 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (venta) => {
           //     this.ventaService.obtenerVentas(apikey);
+          console.log('se concreto la ventaaa');
         },
         ({ error: { mensaje } }) => {
           this.errMsg = mensaje;
         }
       );
   }
-}
-
-export interface PaqueteResponse {
-  code: number;
-  destinos: Paquete[];
 }
