@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { VentaService } from '../../services/venta.service';
 import { Router } from '@angular/router';
-import { Paquete } from '../paquete';
 import { FormBuilder } from '@angular/forms';
 import { PaqueteResponse } from '../../interfaces/paquete-response';
+import { Paquete } from '../../interfaces/paquete';
 
 @Component({
   selector: 'app-dashboard',
