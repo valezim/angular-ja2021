@@ -7,6 +7,7 @@ import { PaqueteResponse } from '../../interfaces/paquete-response';
 import { Paquete } from '../../interfaces/paquete';
 import { VentaResponse } from '../../interfaces/venta-response';
 import { Venta } from '../../interfaces/venta';
+import {  CantidadPaquetesComponent } from '../cantidad-paquetes/cantidad-paquetes.component';
 
 @Component({
   selector: 'app-dashboard',

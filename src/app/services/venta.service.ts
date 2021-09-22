@@ -32,6 +32,11 @@ export class VentaService {
     return this.ventas;
   }
 
+  logOut() {
+    this.paquetes = undefined;
+    this.ventas = undefined;
+  }
+
   getAllPaquetes(token: any) {
     const headers = {
       'Content-type': 'application/json',
