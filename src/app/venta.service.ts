@@ -25,7 +25,34 @@ export class VentaService {
       'Content-type': 'application/json',
       apikey: token,
     };
-    return this.http.get<PaqueteResponse>('https://destinos.develotion.com/paquetes.php', {
+    return this.http.get<PaqueteResponse>(
+      'https://destinos.develotion.com/paquetes.php',
+      {
+        headers,
+      }
+    );
+  }
+
+  agregarVenta(
+    token: any,
+    idVendedor: number,
+    nombreCliente: string,
+    idPaquete: number,
+    cantidadMayores: number,
+    cantidadMenores: number
+  ) {
+    const headers = {
+      'Content-type': 'application/json',
+      apikey: token,
+    };
+    const body = JSON.stringify({
+      idVendedor,
+      nombreCliente,
+      idPaquete,
+      cantidadMayores,
+      cantidadMenores,
+    });
+    return this.http.post('https://destinos.develotion.com/ventas.php', body, {
       headers,
     });
   }

@@ -26,32 +26,41 @@
         <div class="panel-heading">
           <div class="row">
             <div class="col col-xs-6">
-              <input
-                type="text"
-                class="fadeIn second"
-                name="login"
-                placeholder="nombre cliente"
-              />
+              <form [formGroup]="venderPaqueteGroup" (ngSubmit)="formSubmit()">
+                <input
+                  type="text"
+                  class="fadeIn second"
+                  name="login"
+                  placeholder="nombre cliente"
+                  formControlName="nombreCliente"
+                />
 
-              <select>
-                <option>Seleccione un paquete</option>
-                <option *ngFor="let paquete of paquetes">
-                  {{ paquete.nombre }}
-                </option>
-              </select>
+                <select>
+                  <option>Seleccione un paquete</option>
+                  <option
+                    *ngFor="let paquete of paquetes"
+                    formControlName="idPaquete"
+                    [value]="paquete.id"
+                  >
+                    {{ paquete.nombre }}
+                  </option>
+                </select>
 
-              <input
-                type="number"
-                class="fadeIn third"
-                name="login"
-                placeholder="cantidad adultos"
-              />
-              <input
-                type="number"
-                class="fadeIn third"
-                name="login"
-                placeholder="cantidad niños"
-              />
+                <input
+                  type="number"
+                  class="fadeIn third"
+                  name="login"
+                  placeholder="cantidad adultos"
+                />
+                <input
+                  type="number"
+                  class="fadeIn third"
+                  name="login"
+                  placeholder="cantidad niños"
+                />
+
+                <p *ngIf="errMsg">{{ errMsg }}</p>
+              </form>
             </div>
             <div class="col col-xs-6 text-right">
               <button type="button" class="btn btn-sm btn-primary btn-create">
