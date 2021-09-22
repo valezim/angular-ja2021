@@ -54,30 +54,37 @@ export class DashboardComponent implements OnInit {
   }
 
   formSubmit() {
-    console.log('llegamos a la venta');
     this.errMsg = '';
     const apikey = this.userService.getApiKey();
     const idVendedor = this.userService.getUserId();
     const { nombreCliente, idPaquete, cantidadMayores, cantidadMenores } =
       this.venderPaqueteGroup.value;
-    this.ventaService
-      .agregarVenta(
-        apikey,
-        idVendedor,
+    if (
+      this.validarDatosAgregarVenta(
         nombreCliente,
-        idPaquete,
         cantidadMayores,
-        cantidadMenores
+        cantidadMenores,
+        idPaquete
       )
-      .subscribe(
-        (venta) => {
-          this.getVentasDeVendedor();
-          console.log('se concreto la ventaaa');
-        },
-        ({ error: { mensaje } }) => {
-          this.errMsg = mensaje;
-        }
-      );
+    ) {
+      this.ventaService
+        .agregarVenta(
+          apikey,
+          idVendedor,
+          nombreCliente,
+          idPaquete,
+          cantidadMayores,
+          cantidadMenores
+        )
+        .subscribe(
+          (venta) => {
+            this.getVentasDeVendedor();
+          },
+          ({ error: { mensaje } }) => {
+            this.errMsg = mensaje;
+          }
+        );
+    }
   }
 
   getVentasDeVendedor() {
@@ -92,5 +99,32 @@ export class DashboardComponent implements OnInit {
         //alert(error);
       }
     );
+  }
+
+  validarDatosAgregarVenta(
+    nombreCliente: string,
+    cantidadMayores: number,
+    cantidadMenores: number,
+    idPaquete: any
+  ) {
+    this.errMsg = '';
+    if (nombreCliente === undefined || nombreCliente === '') {
+      this.errMsg = 'Debe ingresar el nombre del cliente.';
+      return false;
+    }
+    if (cantidadMayores < 0 || cantidadMenores < 0) {
+      this.errMsg = 'Debe ingresar cantidades válidas.';
+      return false;
+    }
+    if (cantidadMayores + cantidadMenores > 10) {
+      this.errMsg =
+        'La cantidad de niños y adultos sumada no puede superar las 10 personas.';
+      return false;
+    }
+    if (idPaquete === '-1') {
+      this.errMsg = 'Debe seleccionar un paquete.';
+      return false;
+    }
+    return true;
   }
 }

@@ -36,7 +36,7 @@
                 />
 
                 <select formControlName="idPaquete">
-                  <option [ngValue]="null" disabled>
+                  <option [ngValue]="-1">
                     Seleccione un paquete
                   </option>
                   <option *ngFor="let paquete of paquetes" [ngValue]="paquete.id">
