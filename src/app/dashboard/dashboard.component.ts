@@ -36,11 +36,11 @@ export class DashboardComponent implements OnInit {
 
   getAllPaquetes() {
     const apikey = this.userService.getApiKey();
-    console.log(apikey);
     this.ventaService.getAllPaquetes(apikey).subscribe(
       (response: PaqueteResponse) => {
         this.ventaService.updatePaquetes(response.destinos);
         this.paquetes = response.destinos;
+        console.log('se supone que trajo los paquetes ' + this.paquetes);
       },
       (error: any) => {
         //alert(error);
@@ -52,14 +52,15 @@ export class DashboardComponent implements OnInit {
     this.errMsg = '';
     const apikey = this.userService.getApiKey();
     const idVendedor = this.userService.getUserId();
-    const { nombreCliente, idPaquete, cantidadMayores, cantidadMenores } =
+    const idPaquete: Paquete = this.venderPaqueteGroup.value;
+    const { nombreCliente, cantidadMayores, cantidadMenores } =
       this.venderPaqueteGroup.value;
     this.ventaService
       .agregarVenta(
         apikey,
         idVendedor,
         nombreCliente,
-        idPaquete,
+        idPaquete.id,
         cantidadMayores,
         cantidadMenores
       )
