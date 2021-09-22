@@ -13,6 +13,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantidad-paquetes.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantid
     RegistroComponent,
     DashboardComponent,
     CantidadPaquetesComponent,
+    NavbarComponent,
   ],
   bootstrap: [AppComponent],
 })
