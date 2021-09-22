@@ -58,15 +58,14 @@ export class DashboardComponent implements OnInit {
     this.errMsg = '';
     const apikey = this.userService.getApiKey();
     const idVendedor = this.userService.getUserId();
-    const idPaquete: Paquete = this.venderPaqueteGroup.value;
-    const { nombreCliente, cantidadMayores, cantidadMenores } =
+    const { nombreCliente, idPaquete, cantidadMayores, cantidadMenores } =
       this.venderPaqueteGroup.value;
     this.ventaService
       .agregarVenta(
         apikey,
         idVendedor,
         nombreCliente,
-        idPaquete.id,
+        idPaquete,
         cantidadMayores,
         cantidadMenores
       )
