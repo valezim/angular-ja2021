@@ -7,7 +7,8 @@ import { PaqueteResponse } from '../../interfaces/paquete-response';
 import { Paquete } from '../../interfaces/paquete';
 import { VentaResponse } from '../../interfaces/venta-response';
 import { Venta } from '../../interfaces/venta';
-import {  CantidadPaquetesComponent } from '../cantidad-paquetes/cantidad-paquetes.component';
+import { CantidadPaquetesComponent } from '../cantidad-paquetes/cantidad-paquetes.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private ventaService: VentaService,
+    private navbar: NavbarComponent,
     private router: Router
   ) {
     this.venderPaqueteGroup = this.formBuilder.group({
@@ -38,6 +40,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getAllPaquetes();
     this.getVentasDeVendedor();
+    this.navbar.setLogoutVisible(true);
   }
 
   getAllPaquetes() {
