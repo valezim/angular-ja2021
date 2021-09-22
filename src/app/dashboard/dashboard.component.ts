@@ -33,12 +33,14 @@ export class DashboardComponent implements OnInit {
 
   getAllPaquetes() {
     const apikey = this.userService.getApiKey();
+    console.log(apikey)
     this.ventaService.getAllPaquetes(apikey).subscribe((response: PaqueteResponse) => {
       this.ventaService.updatePaquetes(response.destinos);
+      this.paquetes = response.destinos;
     
     },
     (error: any) => {
-      alert(error);
+      //alert(error);
     });
   }
 }

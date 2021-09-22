@@ -4,27 +4,24 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.css']
+  styleUrls: ['./top-bar.component.css'],
 })
 export class TopBarComponent implements OnInit {
-  isLogoutVisible = false;
-  constructor(     private userService: UserService) { }
+  // isLogoutVisible = false;
+  isLogoutVisible = true;
+  constructor(/*private userService: UserService*/) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  logOut(){
+  logOut() {
     this.isLogoutVisible = false;
-    this.userService.logOut();
+    // this.userService.logOut();
   }
 
-  setLogoutVisible (value:boolean){
+  setLogoutVisible(value: boolean) {
     this.isLogoutVisible = value;
   }
-
-
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.
