@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { TopBarComponent } from '../top-bar/top-bar.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    //   private topBar: TopBarComponent,
+    private navbar: NavbarComponent,
     private router: Router
   ) {
     this.loginGroup = this.formBuilder.group({
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       (user) => {
         console.log(user);
         this.userService.setUser(user, usuario);
-        //   this.topBar.setLogoutVisible(true);
+        this.navbar.setLogoutVisible(true);
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
