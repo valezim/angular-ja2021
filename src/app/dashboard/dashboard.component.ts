@@ -4,8 +4,6 @@ import { VentaService } from '../venta.service';
 import { Router } from '@angular/router';
 import { Paquete } from '../paquete';
 
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -13,21 +11,39 @@ import { Paquete } from '../paquete';
 })
 export class DashboardComponent implements OnInit {
   userName = this.userService.getUserName();
+  paquetes = this.ventaService.getPaquetes();
   constructor(
     private userService: UserService,
     private ventaService: VentaService,
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAllPaquetes();
+  }
 
+  //   getAllPaquetes() {
+  //     const apikey = this.userService.getApiKey;
+  //     this.ventaService.getAllPaquetes(apikey).subscribe(
+  //       (paquetes : Paquete[][]) => {
+  //         this.ventaService.updatePaquetes(paquetes);
+  //       },
+  //     );
+  //   }
 
   getAllPaquetes() {
-    const apikey = this.userService.getApiKey;
-    this.ventaService.getAllPaquetes(apikey).subscribe(
-      (paquetes : Paquete[][]) => {
-        this.ventaService.updatePaquetes(paquetes);
-      },
-    );
+    const apikey = this.userService.getApiKey();
+    this.ventaService.getAllPaquetes(apikey).subscribe((response: PaqueteResponse) => {
+      this.ventaService.updatePaquetes(response.destinos);
+    
+    },
+    (error: any) => {
+      alert(error);
+    });
   }
+}
+
+export interface PaqueteResponse{
+  code: number;
+  destinos: Paquete[]
 }
