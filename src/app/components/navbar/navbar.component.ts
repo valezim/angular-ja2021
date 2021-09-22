@@ -8,7 +8,6 @@ import { VentaService } from '../../services/venta.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  isLogoutVisible = false;
   constructor(
     private userService: UserService,
     private ventaService: VentaService
@@ -17,12 +16,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {}
 
   logOut() {
-    this.setLogoutVisible(false);
     this.userService.logOut();
     this.ventaService.logOut();
-  }
-
-  setLogoutVisible(value: boolean) {
-    this.isLogoutVisible = value;
   }
 }
