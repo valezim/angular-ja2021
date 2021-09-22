@@ -33,8 +33,8 @@ export class VentaService {
   }
 
   logOut() {
-    this.paquetes = undefined;
-    this.ventas = undefined;
+    this.paquetes = [];
+    this.ventas = [];
   }
 
   getAllPaquetes(token: any) {
