@@ -12,6 +12,11 @@ export class CantidadPaquetesComponent implements OnInit {
   ngOnInit() {}
 
   getCantidadPaquetesVendidos() {
-    return this.ventaService?.getPaquetes()?.length;
+    const cantPaquetes = this.ventaService?.getPaquetes()?.length;
+    if (cantPaquetes === undefined) {
+      return 0;
+    } else {
+      return cantPaquetes;
+    }
   }
 }
