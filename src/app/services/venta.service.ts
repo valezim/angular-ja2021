@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Paquete } from './paquete';
-import { PaqueteResponse } from './dashboard/dashboard.component';
+import { Paquete } from '../interfaces/paquete';
+import { PaqueteResponse } from '../interfaces/paquete-response';
 
 @Injectable({
   providedIn: 'root',
@@ -69,8 +69,4 @@ export class VentaService {
       }
     );
   }
-
-
-
-
 }
