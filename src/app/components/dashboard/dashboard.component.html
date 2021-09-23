@@ -112,6 +112,20 @@
             </div>
 ---------->
         </div>
+        <table class="table table-striped table-bordered table-list">
+          <thead>
+            <tr>
+              <th>Destino</th>
+              <th>Cantidad usuarios</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let paquete of paquetes">
+              <td align="center">{{ paquete.nombre }}</td>
+              <td>{{ obtenerCantidadUsuariosDeDestino(paquete.id) }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

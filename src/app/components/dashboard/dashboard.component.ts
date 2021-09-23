@@ -145,4 +145,18 @@ export class DashboardComponent implements OnInit {
     const paquete = this.paquetes?.find((paq) => paq?.id === id);
     return paquete;
   }
+
+  /*Listar en una tabla todos los destinos y la cantidad total de usuarios
+que viajan a ese destino (sumados adultos y niños).*/
+  obtenerCantidadUsuariosDeDestino(idPaquete: any) {
+    let cantidadUsuarios = 0;
+    const ventasDePaquete = this.ventas?.filter(
+      (vent) => vent?.id_paquete === idPaquete
+    );
+    ventasDePaquete?.forEach(
+      (vent) =>
+        (cantidadUsuarios += vent.cantidad_mayores + vent.cantidad_menores)
+    );
+    return cantidadUsuarios;
+  }
 }
