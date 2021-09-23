@@ -28,6 +28,9 @@ vendido.
   }
 
   obtenerTopDestinos() {
+    console.log(this.paquetes?.filter(
+      (p) => this.calcularCantidadVentasPaquete(p) > 3
+    ));
     return this.paquetes?.filter(
       (p) => this.calcularCantidadVentasPaquete(p) > 3
     );
