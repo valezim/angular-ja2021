@@ -7,8 +7,8 @@ import { VentaService } from '../../services/venta.service';
   styleUrls: ['./destinos-top.component.css'],
 })
 export class DestinosTopComponent implements OnInit {
-  ventas = this.ventaService.getVentas();
-  paquetes = this.ventaService.getPaquetes();
+//  ventas = this.ventaService.getVentas();
+ // paquetes = this.ventaService.getPaquetes();
   constructor(private ventaService: VentaService) {}
 
   ngOnInit() {}
@@ -18,7 +18,8 @@ sido vendidos más de tres veces, se mostrará el destino y la cantidad de veces
 vendido.
 */
   calcularCantidadVentasPaquete(idPaquete: any) {
-    const ventasDePaquete = this.ventas?.filter(
+    const ventas = this.ventaService.getVentas();
+    const ventasDePaquete = ventas?.filter(
       (vent) => vent?.id_paquete === idPaquete
     );
     if (ventasDePaquete === undefined) {
@@ -28,11 +29,11 @@ vendido.
   }
 
   obtenerTopDestinos() {
-    console.log(this.paquetes?.filter(
-      (p) => this.calcularCantidadVentasPaquete(p) > 3
-    ));
-    return this.paquetes?.filter(
-      (p) => this.calcularCantidadVentasPaquete(p) > 3
+    const paquetes = this.ventaService.getPaquetes();
+    console.log(paquetes);
+    const paquetesFiltrados = paquetes?.filter(
+      ({id}) => this.calcularCantidadVentasPaquete(id) > 3
     );
+    return paquetesFiltrados;
   }
 }
