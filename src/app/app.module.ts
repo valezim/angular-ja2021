@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantidad-paquetes.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DestinosTopComponent } from './components/destinos-top/destinos-top.component';
+import { DestinosSinVentasComponent } from './components/destinos-sin-ventas/destinos-sin-ventas.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { DestinosTopComponent } from './components/destinos-top/destinos-top.com
     CantidadPaquetesComponent,
     NavbarComponent,
     DestinosTopComponent,
+    DestinosSinVentasComponent,
   ],
   bootstrap: [AppComponent],
 })
