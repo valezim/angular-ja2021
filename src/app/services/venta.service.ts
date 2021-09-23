@@ -87,4 +87,9 @@ export class VentaService {
       }
     );
   }
+
+  obtenerPaquetePorId(id: any) {
+    const paquete = this.paquetes?.find((paq) => paq?.id === id);
+    return paquete;
+  }
 }

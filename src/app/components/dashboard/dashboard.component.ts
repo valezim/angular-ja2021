@@ -142,8 +142,7 @@ export class DashboardComponent implements OnInit {
   }
 
   obtenerPaquetePorId(id: any) {
-    const paquete = this.paquetes?.find((paq) => paq?.id === id);
-    return paquete;
+    return this.ventaService.obtenerPaquetePorId(id);
   }
 
   /*Listar en una tabla todos los destinos y la cantidad total de usuarios

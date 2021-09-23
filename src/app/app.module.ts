@@ -14,6 +14,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantidad-paquetes.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DestinosTopComponent } from './components/destinos-top/destinos-top.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     DashboardComponent,
     CantidadPaquetesComponent,
     NavbarComponent,
+    DestinosTopComponent,
   ],
   bootstrap: [AppComponent],
 })
