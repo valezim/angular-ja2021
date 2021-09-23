@@ -92,4 +92,17 @@ export class VentaService {
     const paquete = this.paquetes?.find((paq) => paq?.id === id);
     return paquete;
   }
+
+  calcularCantidadVentasPaquete(idPaquete: any) {
+    const ventas = this.getVentas();
+    const ventasDePaquete = ventas?.filter(
+      (vent) => vent?.id_paquete === idPaquete
+    );
+    if (ventasDePaquete === undefined) {
+      return 0;
+    }
+    return ventasDePaquete?.length;
+  }
+
+
 }

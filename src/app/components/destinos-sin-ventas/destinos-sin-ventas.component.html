@@ -1,1 +1,6 @@
 <h5>Destinos sin ventas:</h5>
+<ul>
+<li *ngFor="let paquete of obtenerDestinosSinVentas()">
+  {{ paquete.nombre }}
+</li>
+</ul>

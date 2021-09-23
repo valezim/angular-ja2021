@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { VentaService } from '../../services/venta.service';
 
 @Component({
   selector: 'app-destinos-sin-ventas',
@@ -6,7 +7,15 @@ import { Component, OnInit, Output } from '@angular/core';
   styleUrls: ['./destinos-sin-ventas.component.css'],
 })
 export class DestinosSinVentasComponent implements OnInit {
-  constructor() {}
+  constructor(private ventaService: VentaService) {}
 
   ngOnInit() {}
+
+  obtenerDestinosSinVentas() {
+    const paquetes = this.ventaService.getPaquetes();
+    const paquetesFiltrados = paquetes?.filter(
+      ({ id }) => this.ventaService.calcularCantidadVentasPaquete(id) === 0
+    );
+    return paquetesFiltrados;
+  }
 }
