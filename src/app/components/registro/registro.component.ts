@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @Component({
   selector: 'app-registro',
@@ -15,7 +14,6 @@ export class RegistroComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    //    private topBar: TopBarComponent,
     private router: Router
   ) {
     this.registerGroup = this.formBuilder.group({
@@ -32,12 +30,10 @@ export class RegistroComponent implements OnInit {
     this.userService.register(usuario, password).subscribe(
       (user) => {
         this.userService.setUser(user, usuario);
-        //    this.topBar.setLogoutVisible(true);
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
         this.errMsg = mensaje;
-        //    this.errMsg = 'El usuario que trata de registrar ya existe.';
       }
     );
   }

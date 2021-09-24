@@ -46,7 +46,6 @@ export class DashboardComponent implements OnInit {
       (response: PaqueteResponse) => {
         this.ventaService.updatePaquetes(response.destinos);
         this.paquetes = response.destinos;
-        console.log('se supone que trajo los paquetes ' + this.paquetes);
       },
       (error: any) => {
         //alert(error);
@@ -60,7 +59,6 @@ export class DashboardComponent implements OnInit {
     const idVendedor = this.userService.getUserId();
     const { nombreCliente, idPaquete, cantidadMayores, cantidadMenores } =
       this.venderPaqueteGroup.value;
-    console.log(idPaquete);
     if (
       this.validarDatosAgregarVenta(
         nombreCliente,

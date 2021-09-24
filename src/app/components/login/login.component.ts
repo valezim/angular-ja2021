@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
- //   private navbar: NavbarComponent,
+    //   private navbar: NavbarComponent,
     private router: Router
   ) {
     this.loginGroup = this.formBuilder.group({
@@ -31,9 +31,8 @@ export class LoginComponent implements OnInit {
     const { usuario, password } = this.loginGroup.value;
     this.userService.login(usuario, password).subscribe(
       (user) => {
-        console.log(user);
         this.userService.setUser(user, usuario);
-     //  this.navbar.setLogoutVisible(true);
+        //  this.navbar.setLogoutVisible(true);
         this.router.navigate(['/dashboard']);
       },
       ({ error: { mensaje } }) => {
