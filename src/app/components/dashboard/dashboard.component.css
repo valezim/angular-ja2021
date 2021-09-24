@@ -1,15 +1,28 @@
-.panel-table .panel-body{
-  padding:0;
+.panel-table .panel-body {
+  padding: 0;
 }
 
-.panel-table .panel-body .table-bordered{
+input,
+label,
+option,
+select {
+  float: center;
+  margin: 5px;
+  border-radius: 7px;
+}
+
+h1 {
+  color:#5e1a1a;
+}
+
+.panel-table .panel-body .table-bordered {
   border-style: none;
-  margin:0;
+  margin: 0;
 }
 
 .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
-    text-align:center;
-    width: 100px;
+  text-align: center;
+  width: 100px;
 }
 
 .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
@@ -22,35 +35,34 @@
   border-left: 0px;
 }
 
-.panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td{
+.panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td {
   border-bottom: 0px;
 }
 
-.panel-table .panel-body .table-bordered > thead > tr:first-of-type > th{
+.panel-table .panel-body .table-bordered > thead > tr:first-of-type > th {
   border-top: 0px;
 }
 
-.panel-table .panel-footer .pagination{
-  margin:0; 
+.panel-table .panel-footer .pagination {
+  margin: 0;
 }
 
 /*
 used to vertically center elements, may need modification if you're not using default sizes.
 */
-.panel-table .panel-footer .col{
- line-height: 34px;
- height: 34px;
+.panel-table .panel-footer .col {
+  line-height: 34px;
+  height: 34px;
 }
 
-.panel-table .panel-heading .col h3{
- line-height: 30px;
- height: 30px;
+.panel-table .panel-heading .col h3 {
+  line-height: 30px;
+  height: 30px;
 }
 
-.panel-table .panel-body .table-bordered > tbody > tr > td{
+.panel-table .panel-body .table-bordered > tbody > tr > td {
   line-height: 34px;
 }
-
 
 .selectBox {
   position: relative;
@@ -68,3 +80,11 @@ used to vertically center elements, may need modification if you're not using de
   top: 0;
   bottom: 0;
 }
+
+button {
+  float: right;
+  margin: 10px;
+  background-color: #5e1a1a;
+}
+
+/*  -----------------------------------------  */

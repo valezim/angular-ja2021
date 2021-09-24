@@ -25,8 +25,8 @@
       <div class="panel panel-default panel-table">
         <div class="panel-heading">
           <div class="row">
-            <div class="col col-xs-6">
-              <form [formGroup]="venderPaqueteGroup" (ngSubmit)="formSubmit()">
+            <form [formGroup]="venderPaqueteGroup" (ngSubmit)="formSubmit()">
+              <div>
                 <input
                   type="text"
                   class="fadeIn second"
@@ -34,15 +34,6 @@
                   placeholder="nombre cliente"
                   formControlName="nombreCliente"
                 />
-
-                <select formControlName="idPaquete">
-                  <option
-                    *ngFor="let paquete of paquetes"
-                    [ngValue]="paquete.id"
-                  >
-                    {{ paquete.nombre }}
-                  </option>
-                </select>
 
                 <input
                   type="number"
@@ -58,12 +49,21 @@
                   placeholder="cantidad niños"
                   formControlName="cantidadMenores"
                 />
-                <button type="submit" class="btn btn-sm btn-primary btn-create">
-                  Vender paquete
-                </button>
+                <select formControlName="idPaquete">
+                  <option
+                    *ngFor="let paquete of paquetes"
+                    [ngValue]="paquete.id"
+                  >
+                    {{ paquete.nombre }}
+                  </option>
+                </select>
+
                 <p *ngIf="errMsg">{{ errMsg }}</p>
-              </form>
-            </div>
+              </div>
+              <button type="submit" class="btn btn-sm btn-primary btn-create">
+                Vender paquete
+              </button>
+            </form>
             <div class="col col-xs-6 text-right"></div>
           </div>
         </div>
@@ -132,6 +132,5 @@
     <p></p>
     <app-destinos-top></app-destinos-top>
     <app-destinos-sin-ventas></app-destinos-sin-ventas>
-   
   </div>
 </div>
