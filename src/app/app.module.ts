@@ -5,9 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductAlertsComponent } from './product-alerts/product-alerts.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -25,16 +22,12 @@ import { DestinosSinVentasComponent } from './components/destinos-sin-ventas/des
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      //   { path: '', component: ProductListComponent },
-      //  { path: 'product/:productId', component: ProductDetailComponent },
+      { path: 'dashboard', component: DashboardComponent }
     ]),
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
-    ProductListComponent,
-    ProductAlertsComponent,
     LoginComponent,
     RegistroComponent,
     DashboardComponent,
@@ -46,9 +39,3 @@ import { DestinosSinVentasComponent } from './components/destinos-sin-ventas/des
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/
