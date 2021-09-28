@@ -143,8 +143,6 @@ export class DashboardComponent implements OnInit {
     return this.ventaService.obtenerPaquetePorId(id);
   }
 
-  /*Listar en una tabla todos los destinos y la cantidad total de usuarios
-que viajan a ese destino (sumados adultos y niños).*/
   obtenerCantidadUsuariosDeDestino(idPaquete: any) {
     let cantidadUsuarios = 0;
     const ventasDePaquete = this.ventas?.filter(
@@ -156,4 +154,9 @@ que viajan a ese destino (sumados adultos y niños).*/
     );
     return cantidadUsuarios;
   }
+
+  calcularPromedioPrecioPaquete (paquete:Paquete) {
+    return (paquete.precio_mayor + paquete.precio_menor) / 2;
+  }
+
 }
