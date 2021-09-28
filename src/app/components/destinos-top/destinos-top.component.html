@@ -1,7 +1,7 @@
 <h5>TOP Destinos:</h5>
-<ul>
+<ol>
   <li *ngFor="let paquete of obtenerTopDestinos()">
     {{ paquete.nombre }} -
     {{ calcularCantidadVentasPaquete(paquete.id) }} Ventas
   </li>
-</ul>
+</ol>

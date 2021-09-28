@@ -1,0 +1,12 @@
+ul {
+  background: #5e1a1a18;
+  padding: 20px;
+}
+
+ul li {
+  text-decoration: bold;
+  color: #5e1a1a;
+  background: #ffffff;
+  padding: 5px;
+  margin-left: 35px;
+}

@@ -47,9 +47,6 @@ h1 {
   margin: 0;
 }
 
-/*
-used to vertically center elements, may need modification if you're not using default sizes.
-*/
 .panel-table .panel-footer .col {
   line-height: 34px;
   height: 34px;
@@ -86,5 +83,3 @@ button {
   margin: 10px;
   background-color: #5e1a1a;
 }
-
-/*  -----------------------------------------  */
