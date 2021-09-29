@@ -16,76 +16,79 @@
 <div class="container">
   <div class="row">
     <p></p>
+    <br />
     <h1>¡Bienvenido/a, {{ userName }}!</h1>
     <app-cantidad-paquetes></app-cantidad-paquetes>
-    <p> </p>
-    <p> </p>
 
-      <div class="panel panel-default panel-table">
-        <div class="panel-heading">
-          <div class="row">
-            <form [formGroup]="venderPaqueteGroup" (ngSubmit)="formSubmit()">
-              <div>
-                <input
-                  type="text"
-                  class="fadeIn second"
-                  name="login"
-                  placeholder="nombre cliente"
-                  formControlName="nombreCliente"
-                />
-                <input
-                  type="number"
-                  class="fadeIn third"
-                  name="login"
-                  placeholder="cantidad adultos"
-                  formControlName="cantidadMayores"
-                />
-                <input
-                  type="number"
-                  class="fadeIn third"
-                  name="login"
-                  placeholder="cantidad niños"
-                  formControlName="cantidadMenores"
-                />
-                <select formControlName="idPaquete">
-                  <option
-                    *ngFor="let paquete of paquetes"
-                    [ngValue]="paquete.id"
-                  >
-                    {{ paquete.nombre }}
-                  </option>
-                </select>
-                <p *ngIf="errMsg">{{ errMsg }}</p>
-              </div>
-              <button type="submit" class="btn btn-sm btn-primary btn-create">
-                Vender paquete
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="panel-body">
-          <table class="table table-striped table-bordered table-list">
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Paquete</th>
-                <th>Adultos</th>
-                <th>Niños</th>
-                <th>Precio final</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let venta of ventas">
-                <td align="center">{{ venta.nombre_cliente }}</td>
-                <td>{{ obtenerPaquetePorId(venta.id_paquete)?.nombre }}</td>
-                <td>{{ venta.cantidad_mayores }}</td>
-                <td>{{ venta.cantidad_menores }}</td>
-                <td>{{ calcularPrecioFinal(venta) }}</td>
-              </tr>
-            </tbody>
-          </table>
+    <br />
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+    <div class="panel panel-default panel-table">
+      <div class="panel-heading">
+        <div class="row">
+          <form [formGroup]="venderPaqueteGroup" (ngSubmit)="formSubmit()">
+            <div>
+              <input
+                type="text"
+                class="fadeIn second"
+                name="login"
+                placeholder="nombre cliente"
+                formControlName="nombreCliente"
+              />
+              <input
+                type="number"
+                class="fadeIn third"
+                name="login"
+                placeholder="cantidad adultos"
+                formControlName="cantidadMayores"
+              />
+              <input
+                type="number"
+                class="fadeIn third"
+                name="login"
+                placeholder="cantidad niños"
+                formControlName="cantidadMenores"
+              />
+              <select formControlName="idPaquete">
+                <option *ngFor="let paquete of paquetes" [ngValue]="paquete.id">
+                  {{ paquete.nombre }}
+                </option>
+              </select>
+              <p *ngIf="errMsg">{{ errMsg }}</p>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary btn-create">
+              Vender paquete
+            </button>
+          </form>
         </div>
       </div>
+      <div class="panel-body">
+        <table class="table table-striped table-bordered table-list">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Paquete</th>
+              <th>Adultos</th>
+              <th>Niños</th>
+              <th>Precio final</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let venta of ventas">
+              <td align="center">{{ venta.nombre_cliente }}</td>
+              <td>{{ obtenerPaquetePorId(venta.id_paquete)?.nombre }}</td>
+              <td>{{ venta.cantidad_mayores }}</td>
+              <td>{{ venta.cantidad_menores }}</td>
+              <td>{{ calcularPrecioFinal(venta) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <p></p>
     <table class="table table-striped table-bordered table-list">
       <thead>
@@ -103,14 +106,7 @@
     </table>
     <p></p>
     <app-destinos-top></app-destinos-top>
-  <br>
+    <br />
     <app-destinos-sin-ventas></app-destinos-sin-ventas>
   </div>
-  <br>
-  <apx-chart
-  [series]="chartOptions.series"
-  [chart]="chartOptions.chart"
-  [xaxis]="chartOptions.xaxis"
-  [title]="chartOptions.title"
-></apx-chart>
 </div>

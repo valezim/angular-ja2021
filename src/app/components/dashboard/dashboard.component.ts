@@ -15,6 +15,7 @@ import {
   ApexXAxis,
   ApexTitleSubtitle,
 } from 'ng-apexcharts';
+import { AnalysisFailure } from '@angular/core/schematics/migrations/missing-injectable/transform';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -29,9 +30,6 @@ export type ChartOptions = {
   styleUrls: ['./dashboard.component.css'],
 })
 
-
-
-
 export class DashboardComponent implements OnInit {
 
   @ViewChild('chart') chart!: ChartComponent;
@@ -40,6 +38,10 @@ export class DashboardComponent implements OnInit {
   userName = this.userService.getUserName();
   paquetes = this.ventaService.getPaquetes();
   ventas = this.ventaService.getVentas();
+  cantidadUsuariosDestino: any[] = [];
+  nombrePaquetes: any[] | undefined = [];
+
+  
   venderPaqueteGroup;
   errMsg: any;
   constructor(
@@ -49,11 +51,12 @@ export class DashboardComponent implements OnInit {
     private router: Router
     
   ) {
+    this.loadGraficas();
     this.chartOptions = {
       series: [
         {
           name: 'Cantidad',
-          data: [10, 41, 35, 51, 49],
+          data: this.cantidadUsuariosDestino,
         },
       ],
       chart: {
@@ -61,10 +64,10 @@ export class DashboardComponent implements OnInit {
         type: 'bar',
       },
       title: {
-        text: 'Gráfica de Columnas',
+        text: 'Usuarios por destino',
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        categories: this.nombrePaquetes,
       },
     };
 
@@ -94,6 +97,9 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+
+
 
   formSubmit() {
     this.errMsg = '';
@@ -201,6 +207,29 @@ export class DashboardComponent implements OnInit {
     return (paquete.precio_mayor + paquete.precio_menor) / 2;
   }
 
+  loadGraficas(){
+    const paquetes = this.ventaService.getPaquetes();
+    console.log("paquetesssss" + paquetes);
   
+    // this.ventaService.getPaquetes()?.forEach(
+    //   (paq) =>
+    //     (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+    // );
+    // this.nombrePaquetes = this.ventaService.getPaquetes()?.map((paq)=> paq?.nombre);
+  
+    this.paquetes?.forEach(
+      (paq) =>
+        (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+    );
+  console.log(this.ventaService.getPaquetes());
+    this.paquetes?.forEach(
+      (paq) =>
+        (console.log(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+    );
+    // this.nombrePaquetes = this.paquetes?.map((paq)=> paq?.nombre);
+    this.cantidadUsuariosDestino.push(1);
+    console.log("se supone que logeo");
+   // this.nombrePaquetes = ["hola","bineyvos"]
+  }
 
 }
