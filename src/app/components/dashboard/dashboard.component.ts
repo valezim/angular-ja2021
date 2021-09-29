@@ -62,6 +62,25 @@ export class DashboardComponent implements OnInit {
       cantidadMayores: 0,
       cantidadMenores: 0,
     });
+
+    this.chartOptions = {
+      series: [
+        {
+          name: 'Cantidad',
+          data: this.cantidadUsuariosDestino,
+        },
+      ],
+      chart: {
+        height: 250,
+        type: 'bar',
+      },
+      title: {
+        text: 'Usuarios por destino',
+      },
+      xaxis: {
+        categories: this.nombrePaquetes,
+      },
+    };
   }
 
   ngOnInit() {
@@ -76,6 +95,12 @@ export class DashboardComponent implements OnInit {
       (response: PaqueteResponse) => {
         this.ventaService.updatePaquetes(response.destinos);
         this.paquetes = response.destinos;
+        console.log("load de response.destinos "+this.paquetes);
+        response.destinos?.forEach(
+          (paq) =>
+            (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+        );
+        console.log("load de cantidadUsuariosDestino "+this.cantidadUsuariosDestino);
       },
       (error: any) => {
         //alert(error);
@@ -219,24 +244,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-   this.chartOptions = {
-    series: [
-      {
-        name: 'Cantidad',
-        data: this.cantidadUsuariosDestino,
-      },
-    ],
-    chart: {
-      height: 250,
-      type: 'bar',
-    },
-    title: {
-      text: 'Usuarios por destino',
-    },
-    xaxis: {
-      categories: this.nombrePaquetes,
-    },
-  };
+
   }
 
 }
