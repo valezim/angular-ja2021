@@ -13,6 +13,7 @@ import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantid
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DestinosTopComponent } from './components/destinos-top/destinos-top.component';
 import { DestinosSinVentasComponent } from './components/destinos-sin-ventas/destinos-sin-ventas.component';
+import { GraficasComponent } from './components/graficas/graficas.component';
  import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { DestinosSinVentasComponent } from './components/destinos-sin-ventas/des
     NavbarComponent,
     DestinosTopComponent,
     DestinosSinVentasComponent,
+    GraficasComponent
   ],
   bootstrap: [AppComponent],
 })
