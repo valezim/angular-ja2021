@@ -104,5 +104,4 @@ export class VentaService {
     return ventasDePaquete?.length;
   }
 
-
 }

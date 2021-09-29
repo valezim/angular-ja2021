@@ -51,25 +51,9 @@ export class DashboardComponent implements OnInit {
     private router: Router
     
   ) {
-    this.loadGraficas();
-    this.chartOptions = {
-      series: [
-        {
-          name: 'Cantidad',
-          data: this.cantidadUsuariosDestino,
-        },
-      ],
-      chart: {
-        height: 250,
-        type: 'bar',
-      },
-      title: {
-        text: 'Usuarios por destino',
-      },
-      xaxis: {
-        categories: this.nombrePaquetes,
-      },
-    };
+  //  this.getAllPaquetes();
+  //  this.loadGraficas();
+
 
     this.venderPaqueteGroup = this.formBuilder.group({
       idVendedor: 0,
@@ -83,6 +67,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getAllPaquetes();
     this.getVentasDeVendedor();
+    this.loadGraficas();
   }
 
   getAllPaquetes() {
@@ -230,6 +215,28 @@ export class DashboardComponent implements OnInit {
     this.cantidadUsuariosDestino.push(1);
     console.log("se supone que logeo");
    // this.nombrePaquetes = ["hola","bineyvos"]
+
+
+
+
+   this.chartOptions = {
+    series: [
+      {
+        name: 'Cantidad',
+        data: this.cantidadUsuariosDestino,
+      },
+    ],
+    chart: {
+      height: 250,
+      type: 'bar',
+    },
+    title: {
+      text: 'Usuarios por destino',
+    },
+    xaxis: {
+      categories: this.nombrePaquetes,
+    },
+  };
   }
 
 }
