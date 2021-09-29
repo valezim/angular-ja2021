@@ -13,12 +13,14 @@ import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantid
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DestinosTopComponent } from './components/destinos-top/destinos-top.component';
 import { DestinosSinVentasComponent } from './components/destinos-sin-ventas/destinos-sin-ventas.component';
+ import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChartsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
