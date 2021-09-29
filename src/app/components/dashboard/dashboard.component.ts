@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { VentaService } from '../../services/venta.service';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { PaqueteResponse } from '../../interfaces/paquete-response';
 import { Paquete } from '../../interfaces/paquete';
 import { VentaResponse } from '../../interfaces/venta-response';
@@ -95,13 +95,9 @@ export class DashboardComponent implements OnInit {
       (response: PaqueteResponse) => {
         this.ventaService.updatePaquetes(response.destinos);
         this.paquetes = response.destinos;
-        console.log("load de response.destinos "+this.paquetes);
-        response.destinos?.forEach(
-          (paq) =>
-            (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
-        );
-        console.log("load de cantidadUsuariosDestino "+this.cantidadUsuariosDestino);
+        this.cantidadUsuariosDestino = response.destinos?.map((paq)=> this.obtenerCantidadUsuariosDeDestino(paq.id));
         this.nombrePaquetes = response.destinos?.map((paq)=> paq?.nombre);
+        this.loadGraficas()
       },
       
       (error: any) => {
@@ -248,28 +244,46 @@ this.updateSeries();
 
   }
 
+  public updateSeries = () => {
+    // let data = this.chartOptions.series[0].data;
+    // data.push({
+    //   x: new Date(1538894800000),
+    //   y: [6669.81, 6660.5, 6663.04, 6663.33]
+    // });
+    this.cantidadUsuariosDestino = [];
+    this.nombrePaquetes = [];
+    this.chartOptions.series = [
+      {
+        data: this.cantidadUsuariosDestino
+      }
+    ];
+    this.chartOptions.xaxis = [
+      {
+        categories: this.nombrePaquetes
+      }
+    ];
+  };
 
-
-  public updateSeries() {
-    this.chartOptions = {
-      series: [
-        {
-          name: 'Cantidad',
-          data: this.cantidadUsuariosDestino,
-        },
-      ],
-      chart: {
-        height: 250,
-        type: 'bar',
-      },
-      title: {
-        text: 'Usuarios por destino',
-      },
-      xaxis: {
-        categories: this.nombrePaquetes,
-      },
-    };
-  }
+  // public updateSeries() {
+  //   this.chartOptions = {
+  //     series: [
+  //       {
+  //         name: 'Cantidad',
+  //         data: this.cantidadUsuariosDestino,
+  //       },
+  //     ],
+  //     chart: {
+  //       height: 250,
+  //       type: 'bar',
+  //     },
+  //     title: {
+  //       text: 'Usuarios por destino',
+  //     },
+  //     xaxis: {
+  //       categories: this.nombrePaquetes,
+  //     },
+  //   };
+  // }
 
   
 
