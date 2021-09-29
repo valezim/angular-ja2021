@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { VentaService } from '../../services/venta.service';
 import { Router } from '@angular/router';
@@ -8,13 +8,35 @@ import { Paquete } from '../../interfaces/paquete';
 import { VentaResponse } from '../../interfaces/venta-response';
 import { Venta } from '../../interfaces/venta';
 import { CantidadPaquetesComponent } from '../cantidad-paquetes/cantidad-paquetes.component';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle,
+} from 'ng-apexcharts';
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+};
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
+
+
+
+
 export class DashboardComponent implements OnInit {
+
+  @ViewChild('chart') chart!: ChartComponent;
+  public chartOptions!: Partial<ChartOptions> | any;
+
   userName = this.userService.getUserName();
   paquetes = this.ventaService.getPaquetes();
   ventas = this.ventaService.getVentas();
@@ -25,7 +47,27 @@ export class DashboardComponent implements OnInit {
     private userService: UserService,
     private ventaService: VentaService,
     private router: Router
+    
   ) {
+    this.chartOptions = {
+      series: [
+        {
+          name: 'Cantidad',
+          data: [10, 41, 35, 51, 49],
+        },
+      ],
+      chart: {
+        height: 250,
+        type: 'bar',
+      },
+      title: {
+        text: 'Gráfica de Columnas',
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+      },
+    };
+
     this.venderPaqueteGroup = this.formBuilder.group({
       idVendedor: 0,
       nombreCliente: '',
@@ -158,5 +200,7 @@ export class DashboardComponent implements OnInit {
   calcularPromedioPrecioPaquete (paquete:Paquete) {
     return (paquete.precio_mayor + paquete.precio_menor) / 2;
   }
+
+  
 
 }
