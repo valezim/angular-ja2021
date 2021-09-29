@@ -101,7 +101,9 @@ export class DashboardComponent implements OnInit {
             (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
         );
         console.log("load de cantidadUsuariosDestino "+this.cantidadUsuariosDestino);
+        this.nombrePaquetes = response.destinos?.map((paq)=> paq?.nombre);
       },
+      
       (error: any) => {
         //alert(error);
       }
@@ -241,10 +243,34 @@ export class DashboardComponent implements OnInit {
     console.log("se supone que logeo");
    // this.nombrePaquetes = ["hola","bineyvos"]
 
-
-
+this.updateSeries();
 
 
   }
+
+
+
+  public updateSeries() {
+    this.chartOptions = {
+      series: [
+        {
+          name: 'Cantidad',
+          data: this.cantidadUsuariosDestino,
+        },
+      ],
+      chart: {
+        height: 250,
+        type: 'bar',
+      },
+      title: {
+        text: 'Usuarios por destino',
+      },
+      xaxis: {
+        categories: this.nombrePaquetes,
+      },
+    };
+  }
+
+  
 
 }
