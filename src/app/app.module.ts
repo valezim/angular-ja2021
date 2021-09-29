@@ -13,15 +13,14 @@ import { CantidadPaquetesComponent } from './components/cantidad-paquetes/cantid
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DestinosTopComponent } from './components/destinos-top/destinos-top.component';
 import { DestinosSinVentasComponent } from './components/destinos-sin-ventas/destinos-sin-ventas.component';
-import { GraficasComponent } from './components/graficas/graficas.component';
- import { ChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ChartsModule,
+    NgApexchartsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
@@ -37,8 +36,7 @@ import { GraficasComponent } from './components/graficas/graficas.component';
     CantidadPaquetesComponent,
     NavbarComponent,
     DestinosTopComponent,
-    DestinosSinVentasComponent,
-    GraficasComponent
+    DestinosSinVentasComponent
   ],
   bootstrap: [AppComponent],
 })
