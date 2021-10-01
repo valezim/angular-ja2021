@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions> | any;
+  public chartOptions2!: Partial<ChartOptions> | any;
 
   userName = this.userService.getUserName();
   paquetes = this.ventaService.getPaquetes();
@@ -81,13 +82,135 @@ export class DashboardComponent implements OnInit {
         categories: ["0"],
       },
     };
+
+
+
+    this.chartOptions2 = {
+      series: [
+        {
+          name: 'Cantidad',
+          data: [0],
+        },
+      ],
+      chart: {
+        height: 250,
+        type: 'bar',
+      },
+      title: {
+        text: 'Promedio precios paquetes',
+      },
+      xaxis: {
+        categories: ["0"],
+      },
+    };
+
+
+    // this.chartOptions = {
+    //   series: [
+    //     {
+    //       name: "Inflation",
+    //       data: []
+    //     }
+    //   ],
+    //   chart: {
+    //     height: 350,
+    //     type: "bar"
+    //   },
+    //   plotOptions: {
+    //     bar: {
+    //       dataLabels: {
+    //         position: "top" // top, center, bottom
+    //       }
+    //     }
+    //   },
+    //   dataLabels: {
+    //     enabled: true,
+    //     // formatter: function(val) {
+    //     //   return val + "%";
+    //     // },
+    //     offsetY: -20,
+    //     style: {
+    //       fontSize: "12px",
+    //       colors: ["#304758"]
+    //     }
+    //   },
+
+    //   xaxis: {
+    //     categories: [],
+    //     position: "top",
+    //     labels: {
+    //       offsetY: -18
+    //     },
+    //     axisBorder: {
+    //       show: false
+    //     },
+    //     axisTicks: {
+    //       show: false
+    //     },
+    //     crosshairs: {
+    //       fill: {
+    //         type: "gradient",
+    //         gradient: {
+    //           colorFrom: "#D8E3F0",
+    //           colorTo: "#BED1E6",
+    //           stops: [0, 100],
+    //           opacityFrom: 0.4,
+    //           opacityTo: 0.5
+    //         }
+    //       }
+    //     },
+    //     tooltip: {
+    //       enabled: true,
+    //       offsetY: -35
+    //     }
+    //   },
+    //   fill: {
+    //     type: "gradient",
+    //     gradient: {
+    //       shade: "light",
+    //       type: "horizontal",
+    //       shadeIntensity: 0.25,
+    //       gradientToColors: undefined,
+    //       inverseColors: true,
+    //       opacityFrom: 1,
+    //       opacityTo: 1,
+    //       stops: [50, 0, 100, 100]
+    //     }
+    //   },
+    //   yaxis: {
+    //     axisBorder: {
+    //       show: false
+    //     },
+    //     axisTicks: {
+    //       show: false
+    //     },
+    //     labels: {
+    //       show: false,
+    //     //   formatter: function(val) {
+    //     //     return val + "%";
+    //     //   }
+    //     // }
+    //   },
+    //   title: {
+    //     text: "Usuarios por destino",
+    //     floating: 0,
+    //     offsetY: 320,
+    //     align: "center",
+    //     style: {
+    //       color: "#444"
+    //     }
+    //   }
+    // }
+    // };
+
+  
+
+    
   }
 
   ngOnInit() {
     this.getAllPaquetes();
     this.getVentasDeVendedor();
-    // if (this.paquetes != undefined)
-    // this.updateGrafica(this.paquetes);
   }
 
   getAllPaquetes() {
@@ -98,7 +221,7 @@ export class DashboardComponent implements OnInit {
         this.ventaService.updatePaquetes(paquetes);
         this.paquetes = paquetes;
         console.log("paquetes de get all paquetes " + paquetes);
-       // this.updateGrafica(paquetes);
+        this.updateGrafica(paquetes);
       },
       
       (error: any) => {
@@ -108,41 +231,37 @@ export class DashboardComponent implements OnInit {
   }
 
 updateGrafica(paquetes: Paquete[]) {
-  console.log("estoy en update grafica y los pquetes quye me pasaron son" + paquetes);
   if (paquetes!= undefined && paquetes.length != 0) {
+  const cantidadUsuariosDestino = paquetes?.map((paq)=> this.obtenerCantidadUsuariosDeDestino(paq.id));
+  const promedioPrecios = paquetes?.map((paq)=> this.calcularPromedioPrecioPaquete(paq));
+  const nombrePaquetes = paquetes?.map((paq)=> paq?.nombre);
+  this.chartOptions.series = [
+    {
+      data: cantidadUsuariosDestino
+    }
+  ];
+  this.chartOptions.xaxis = 
+    {
+      categories: nombrePaquetes
+    }
+  ;
 
-  // const cantidadUsuariosDestino = paquetes?.map((paq)=> this.obtenerCantidadUsuariosDeDestino(paq.id));
-  // const nombrePaquetes = paquetes?.map((paq)=> paq?.nombre);
-
-  let cantidadUsuariosDestino: any[] = [];
-  let nombrePaquetes: any[] = [];
-  
-      paquetes?.forEach(
-        (paq) =>
-          (cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
-      );
-  
-      paquetes?.forEach(
-        (paq) =>
-          (nombrePaquetes?.push(paq?.nombre))
-      );
-  
-  
-  
-    console.log("la cantidadUsuariosDestino es " + cantidadUsuariosDestino);
-    console.log("la nombrePaquetes es " + nombrePaquetes);
-    this.chartOptions.series = [
-      {
-        data: cantidadUsuariosDestino
-      }
-    ];
-    this.chartOptions.xaxis = [
-      {
-        categories: nombrePaquetes
-      }
-    ];
+  this.chartOptions2.series = [
+    {
+      data: promedioPrecios
+    }
+  ];
+  this.chartOptions2.xaxis = 
+    {
+      categories: nombrePaquetes
+    }
+  ;
   }
 
+
+
+
+  
 }
 
 
@@ -172,6 +291,8 @@ updateGrafica(paquetes: Paquete[]) {
         .subscribe(
           (venta) => {
             this.getVentasDeVendedor();
+            if (this.paquetes != undefined)
+            this.updateGrafica(this.paquetes);
           },
           ({ error: { mensaje } }) => {
             this.errMsg = mensaje;
@@ -187,8 +308,6 @@ updateGrafica(paquetes: Paquete[]) {
       (response: VentaResponse) => {
         this.ventaService.updateVentas(response.ventas);
         this.ventas = response.ventas;
-        if (this.paquetes != undefined)
-        this.updateGrafica(this.paquetes);
       },
       (error: any) => {
         //alert(error);
