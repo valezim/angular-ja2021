@@ -21,21 +21,7 @@
     <app-cantidad-paquetes></app-cantidad-paquetes>
 
     <br />
-    <apx-chart
-    
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [xaxis]="chartOptions.xaxis"
-      [title]="chartOptions.title"
-    ></apx-chart>
 
-    <apx-chart
-    
-    [series]="chartOptions2.series"
-    [chart]="chartOptions2.chart"
-    [xaxis]="chartOptions2.xaxis"
-    [title]="chartOptions2.title"
-  ></apx-chart>
     <div class="panel panel-default panel-table">
       <div class="panel-heading">
         <div class="row">
@@ -117,5 +103,18 @@
     <app-destinos-top></app-destinos-top>
     <br />
     <app-destinos-sin-ventas></app-destinos-sin-ventas>
+    <br />
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+    <apx-chart
+      [series]="chartOptions2.series"
+      [chart]="chartOptions2.chart"
+      [xaxis]="chartOptions2.xaxis"
+      [title]="chartOptions2.title"
+    ></apx-chart>
   </div>
 </div>
