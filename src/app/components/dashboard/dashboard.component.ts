@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
       series: [
         {
           name: 'Cantidad',
-          data: [],
+          data: [0],
         },
       ],
       chart: {
@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
         text: 'Usuarios por destino',
       },
       xaxis: {
-        categories: [],
+        categories: ["0"],
       },
     };
   }
@@ -86,8 +86,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getAllPaquetes();
     this.getVentasDeVendedor();
-    if (this.paquetes != undefined)
-    this.updateGrafica(this.paquetes);
+    // if (this.paquetes != undefined)
+    // this.updateGrafica(this.paquetes);
   }
 
   getAllPaquetes() {
@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
         this.ventaService.updatePaquetes(paquetes);
         this.paquetes = paquetes;
         console.log("paquetes de get all paquetes " + paquetes);
-        this.updateGrafica(paquetes);
+       // this.updateGrafica(paquetes);
       },
       
       (error: any) => {
@@ -109,20 +109,39 @@ export class DashboardComponent implements OnInit {
 
 updateGrafica(paquetes: Paquete[]) {
   console.log("estoy en update grafica y los pquetes quye me pasaron son" + paquetes);
-  const cantidadUsuariosDestino = paquetes?.map((paq)=> this.obtenerCantidadUsuariosDeDestino(paq.id));
-  const nombrePaquetes = paquetes?.map((paq)=> paq?.nombre);
-  console.log("la cantidadUsuariosDestino es " + cantidadUsuariosDestino);
-  console.log("la nombrePaquetes es " + nombrePaquetes);
-  this.chartOptions.series = [
-    {
-      data: cantidadUsuariosDestino
-    }
-  ];
-  this.chartOptions.xaxis = [
-    {
-      categories: nombrePaquetes
-    }
-  ];
+  if (paquetes!= undefined && paquetes.length != 0) {
+
+  // const cantidadUsuariosDestino = paquetes?.map((paq)=> this.obtenerCantidadUsuariosDeDestino(paq.id));
+  // const nombrePaquetes = paquetes?.map((paq)=> paq?.nombre);
+
+  let cantidadUsuariosDestino: any[] = [];
+  let nombrePaquetes: any[] = [];
+  
+      paquetes?.forEach(
+        (paq) =>
+          (cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+      );
+  
+      paquetes?.forEach(
+        (paq) =>
+          (nombrePaquetes?.push(paq?.nombre))
+      );
+  
+  
+  
+    console.log("la cantidadUsuariosDestino es " + cantidadUsuariosDestino);
+    console.log("la nombrePaquetes es " + nombrePaquetes);
+    this.chartOptions.series = [
+      {
+        data: cantidadUsuariosDestino
+      }
+    ];
+    this.chartOptions.xaxis = [
+      {
+        categories: nombrePaquetes
+      }
+    ];
+  }
 
 }
 
