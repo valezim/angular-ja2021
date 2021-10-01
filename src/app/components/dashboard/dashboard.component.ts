@@ -38,8 +38,8 @@ export class DashboardComponent implements OnInit {
   userName = this.userService.getUserName();
   paquetes = this.ventaService.getPaquetes();
   ventas = this.ventaService.getVentas();
-  cantidadUsuariosDestino: any[] = [];
-  nombrePaquetes: any[] | undefined = [];
+  // cantidadUsuariosDestino: any[] = [];
+  // nombrePaquetes: any[] | undefined = [];
 
   
   venderPaqueteGroup;
@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
       series: [
         {
           name: 'Cantidad',
-          data: this.cantidadUsuariosDestino,
+          data: [],
         },
       ],
       chart: {
@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
         text: 'Usuarios por destino',
       },
       xaxis: {
-        categories: this.nombrePaquetes,
+        categories: [],
       },
     };
   }
@@ -86,18 +86,19 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getAllPaquetes();
     this.getVentasDeVendedor();
-    this.loadGraficas();
+    if (this.paquetes != undefined)
+    this.updateGrafica(this.paquetes);
   }
 
   getAllPaquetes() {
     const apikey = this.userService.getApiKey();
     this.ventaService.getAllPaquetes(apikey).subscribe(
       (response: PaqueteResponse) => {
-        this.ventaService.updatePaquetes(response.destinos);
-        this.paquetes = response.destinos;
-        this.cantidadUsuariosDestino = response.destinos?.map((paq)=> this.obtenerCantidadUsuariosDeDestino(paq.id));
-        this.nombrePaquetes = response.destinos?.map((paq)=> paq?.nombre);
-        this.loadGraficas()
+        const paquetes = response.destinos;
+        this.ventaService.updatePaquetes(paquetes);
+        this.paquetes = paquetes;
+        console.log("paquetes de get all paquetes " + paquetes);
+        this.updateGrafica(paquetes);
       },
       
       (error: any) => {
@@ -106,7 +107,24 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+updateGrafica(paquetes: Paquete[]) {
+  console.log("estoy en update grafica y los pquetes quye me pasaron son" + paquetes);
+  const cantidadUsuariosDestino = paquetes?.map((paq)=> this.obtenerCantidadUsuariosDeDestino(paq.id));
+  const nombrePaquetes = paquetes?.map((paq)=> paq?.nombre);
+  console.log("la cantidadUsuariosDestino es " + cantidadUsuariosDestino);
+  console.log("la nombrePaquetes es " + nombrePaquetes);
+  this.chartOptions.series = [
+    {
+      data: cantidadUsuariosDestino
+    }
+  ];
+  this.chartOptions.xaxis = [
+    {
+      categories: nombrePaquetes
+    }
+  ];
 
+}
 
 
   formSubmit() {
@@ -150,6 +168,8 @@ export class DashboardComponent implements OnInit {
       (response: VentaResponse) => {
         this.ventaService.updateVentas(response.ventas);
         this.ventas = response.ventas;
+        if (this.paquetes != undefined)
+        this.updateGrafica(this.paquetes);
       },
       (error: any) => {
         //alert(error);
@@ -215,54 +235,58 @@ export class DashboardComponent implements OnInit {
     return (paquete.precio_mayor + paquete.precio_menor) / 2;
   }
 
-  loadGraficas(){
-    const paquetes = this.ventaService.getPaquetes();
-    console.log("paquetesssss" + paquetes);
+
+
+
+
+//   loadGraficas(){
+//     const paquetes = this.ventaService.getPaquetes();
+//     console.log("paquetesssss" + paquetes);
   
-    // this.ventaService.getPaquetes()?.forEach(
-    //   (paq) =>
-    //     (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
-    // );
-    // this.nombrePaquetes = this.ventaService.getPaquetes()?.map((paq)=> paq?.nombre);
+//     // this.ventaService.getPaquetes()?.forEach(
+//     //   (paq) =>
+//     //     (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+//     // );
+//     // this.nombrePaquetes = this.ventaService.getPaquetes()?.map((paq)=> paq?.nombre);
   
-    this.paquetes?.forEach(
-      (paq) =>
-        (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
-    );
-  console.log(this.ventaService.getPaquetes());
-    this.paquetes?.forEach(
-      (paq) =>
-        (console.log(this.obtenerCantidadUsuariosDeDestino(paq.id)))
-    );
-    // this.nombrePaquetes = this.paquetes?.map((paq)=> paq?.nombre);
-    this.cantidadUsuariosDestino.push(1);
-    console.log("se supone que logeo");
-   // this.nombrePaquetes = ["hola","bineyvos"]
+//     this.paquetes?.forEach(
+//       (paq) =>
+//         (this.cantidadUsuariosDestino?.push(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+//     );
+//   console.log(this.ventaService.getPaquetes());
+//     this.paquetes?.forEach(
+//       (paq) =>
+//         (console.log(this.obtenerCantidadUsuariosDeDestino(paq.id)))
+//     );
+//     // this.nombrePaquetes = this.paquetes?.map((paq)=> paq?.nombre);
+//     this.cantidadUsuariosDestino.push(1);
+//     console.log("se supone que logeo");
+//    // this.nombrePaquetes = ["hola","bineyvos"]
 
-this.updateSeries();
+// this.updateSeries();
 
 
-  }
+//   }
 
-  public updateSeries = () => {
-    // let data = this.chartOptions.series[0].data;
-    // data.push({
-    //   x: new Date(1538894800000),
-    //   y: [6669.81, 6660.5, 6663.04, 6663.33]
-    // });
-    this.cantidadUsuariosDestino = [];
-    this.nombrePaquetes = [];
-    this.chartOptions.series = [
-      {
-        data: this.cantidadUsuariosDestino
-      }
-    ];
-    this.chartOptions.xaxis = [
-      {
-        categories: this.nombrePaquetes
-      }
-    ];
-  };
+//   public updateSeries = () => {
+//     // let data = this.chartOptions.series[0].data;
+//     // data.push({
+//     //   x: new Date(1538894800000),
+//     //   y: [6669.81, 6660.5, 6663.04, 6663.33]
+//     // });
+//     this.cantidadUsuariosDestino = [];
+//     this.nombrePaquetes = [];
+//     this.chartOptions.series = [
+//       {
+//         data: this.cantidadUsuariosDestino
+//       }
+//     ];
+//     this.chartOptions.xaxis = [
+//       {
+//         categories: this.nombrePaquetes
+//       }
+//     ];
+//   };
 
   // public updateSeries() {
   //   this.chartOptions = {
